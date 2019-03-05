@@ -1,10 +1,11 @@
 {
-  "name": "instagram-app",
+  "name": "react-starter",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5"
   },
   "scripts": {
@@ -12,7 +13,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "precommit": "NODE_ENV=production lint-staged",
     "lint-staged": {
       "*.{js,jsx}": [
         "pretty-quick --staged",
@@ -38,7 +38,6 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
-    "husky": "^1.3.1",
     "lint-staged": "^8.1.4",
     "prettier": "^1.16.4",
     "pretty-quick": "^1.10.0"
