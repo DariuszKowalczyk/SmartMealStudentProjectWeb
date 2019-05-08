@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Container, Columns, Form, Section, Field } from 'react-bulma-components/full';
+import React from 'react';
+import { Container, Column, Section } from 'rbx';
 import Login from './components/Login/LoginContainer';
 
 export default function home() {
   return (
     <Section>
       <Container>
-        <Columns centered>
-          <Columns.Column size={8}>
+        <Column.Group centered>
+          <Column size={8}>
             <Login />
-          </Columns.Column>
-        </Columns>
+          </Column>
+        </Column.Group>
       </Container>
     </Section>
   );

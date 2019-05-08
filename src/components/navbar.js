@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
-import { Navbar } from 'react-bulma-components/full';
-import styled from 'styled-components';
-
-const NavigationBar = styled(Navbar)``;
+import { Navbar, Button } from 'rbx';
 
 export default function NavbarLayout() {
-  const [open, setOpen] = useState(false);
-  const toggleOpen = () => {
-    setOpen(!open);
-  };
   return (
-    <NavigationBar color="primary" active={open}>
+    <Navbar transparent color="primary">
       <Navbar.Brand>
-        <Navbar.Item renderAs="p">ContestApp</Navbar.Item>
-        <Navbar.Burger onClick={() => toggleOpen()} />
+        <Navbar.Item>SMART MEAL</Navbar.Item>
+        <Navbar.Burger />
       </Navbar.Brand>
       <Navbar.Menu>
-        <Navbar.Container>
-          <Navbar.Item href="#">Second</Navbar.Item>
-        </Navbar.Container>
-        <Navbar.Container position="end">
-          <Navbar.Item href="#">At the end</Navbar.Item>
-        </Navbar.Container>
+        <Navbar.Segment align="end">
+          <Navbar.Item>
+            <Button.Group>
+              <Button color="primary">
+                <strong>Sign up</strong>
+              </Button>
+              <Button color="light">Log in</Button>
+            </Button.Group>
+          </Navbar.Item>
+        </Navbar.Segment>
       </Navbar.Menu>
-    </NavigationBar>
+    </Navbar>
   );
 }
