@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "formik": "^1.5.4",
     "rbx": "^2.1.0",
     "react": "^16.8.2",
     "react-bulma-components": "^2.3.0",
@@ -12,11 +13,14 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
+    "react-spinners": "^0.5.4",
     "redux": "^4.0.1",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "universal-cookie": "^4.0.0",
+    "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "HTTPS=true react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
