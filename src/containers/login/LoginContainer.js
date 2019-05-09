@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Column, Section } from 'rbx';
-import Login from './components/Login/LoginContainer';
+import LoginHeader from '../../components/Login/Header';
+import LoginBody from '../../components/Login/LoginBody';
 
 export default function home() {
   return (
@@ -8,7 +9,8 @@ export default function home() {
       <Container>
         <Column.Group centered>
           <Column size={8}>
-            <Login />
+            <LoginHeader />
+            <LoginBody />
           </Column>
         </Column.Group>
       </Container>

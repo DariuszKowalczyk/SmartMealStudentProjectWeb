@@ -6,12 +6,10 @@ import { Button, Form } from 'react-bulma-components/full';
 import styled from 'styled-components';
 import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
-import * as Yup from 'yup';
 import Cookies from 'universal-cookie';
-import { css } from '@emotion/core';
+import * as Yup from 'yup';
 import { ClipLoader } from 'react-spinners';
 import AuthHeader from '../../helpers/AuthHeader';
-import { useFormInput } from '../../hooks/useFormInput';
 
 const TextInput = styled(Form.Input)`
   margin: 5px 0 5px 0;
@@ -45,7 +43,6 @@ const LoginForm = props => {
     }
   };
   const responseFacebook = response => {
-    console.log(response);
     axios.post('http://localhost:56829/api/FacebookAuth', { accessToken: response.accessToken });
   };
 
