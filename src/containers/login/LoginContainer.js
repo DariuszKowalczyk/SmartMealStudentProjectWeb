@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Column, Section } from 'rbx';
-import LoginHeader from '../../components/Login/Header';
-import LoginBody from '../../components/Login/LoginBody';
+import LoginHeader from '../../components/login/Header';
+import LoginBody from '../../components/login/LoginBody';
 
 export default function home() {
   return (
