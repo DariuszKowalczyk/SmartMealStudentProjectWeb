@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Form } from 'react-bulma-components/full';
 import { withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import Calendar from '../../components/calendar/Calendar';
 
 const cookies = new Cookies();
 const Home = props => {
@@ -14,6 +15,7 @@ const Home = props => {
   return (
     <div>
       Home hello <Button onClick={() => logout()}>WYLOGUJ</Button>
+      <Calendar />
     </div>
   );
 };

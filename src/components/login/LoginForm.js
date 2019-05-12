@@ -13,9 +13,6 @@ import { ErrorBox, SuccessBox } from '../common/Notifications';
 import { CustomFormInputWithError } from '../common/CustomFormInputWithError';
 import AuthHeader from '../../helpers/AuthHeader';
 
-const TextInput = styled(Form.Input)`
-  margin: 5px 0 5px 0;
-`;
 const SubmitButton = styled(Button)`
   background-color: #1a5e63;
   color: #fff;

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 // import { Button, Field, Input } from 'rbx';
 import { Formik, Form as FormikForm, ErrorMessage, Field } from 'formik';
-import { useAlert } from 'react-alert';
 import { Button, Form } from 'react-bulma-components/full';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -30,7 +29,6 @@ const RegisterSchema = Yup.object().shape({
 });
 
 const RegisterForm = props => {
-  const alert = useAlert();
   const registerRequest = async (email, password, setStatus, resetForm) => {
     try {
       await axios.post('http://localhost:56829/api/Account/register', { email, password });
