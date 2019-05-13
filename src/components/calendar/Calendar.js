@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { Button } from 'react-bulma-components/full';
 import CalendarHeader from './CalendarHeader.js';
 import CalendarBody from './CalendarBody.js';
 import 'moment/locale/pl';

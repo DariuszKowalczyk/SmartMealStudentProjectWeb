@@ -7,7 +7,7 @@ import { store } from './store/Store';
 import { PrivateRoute, NotAuthorizeRoute } from './helpers/RouteHelper';
 import Login from './containers/login/LoginContainer';
 import Home from './containers/home/HomeContainer';
-import Navbar from './components/navbar';
+import Navbar from './components/navbar/Navbar';
 
 const cookies = new Cookies();
 

@@ -38,11 +38,15 @@
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.09);
     min-height: 500px;
     max-height: 500px;
-    overflow-y: auto;
-    overflow-x: hidden; 
+
     background-color: #D1DEDE;
 }
-
+.calendar-body-column{
+    border-right: 1px solid gray
+}
+.calendar-body-column:last-child{
+    border: none
+}
 .fab-item.custom-floating-button{
     z-index: 100;
     position: absolute;

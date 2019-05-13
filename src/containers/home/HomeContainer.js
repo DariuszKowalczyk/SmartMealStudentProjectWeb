@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form } from 'react-bulma-components/full';
+import { Button, Container } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Calendar from '../../components/calendar/Calendar';
@@ -13,10 +13,10 @@ const Home = props => {
     props.history.push('/login');
   };
   return (
-    <div>
+    <Container fluid>
       Home hello <Button onClick={() => logout()}>WYLOGUJ</Button>
       <Calendar />
-    </div>
+    </Container>
   );
 };
 

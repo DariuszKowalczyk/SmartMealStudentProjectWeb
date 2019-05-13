@@ -6,9 +6,12 @@ import { FaPlus } from 'react-icons/fa';
 import CalendarElement from './CalendarElement';
 import useModal from '../../hooks/useModal';
 import Modal from '../common/Modal';
+import MealColumn from './CalendarBodyColumn';
+import CalendarBodyHeader from './CalendarBodyHeader';
 import './Calendar.css';
 
 const CalendarBody = props => {
+  const meals = ['Śniadanie', 'II Śniadanie', 'Obiad', 'Podwieczorek', 'Kolacja'];
   const [child, setNewChild] = useState([]);
   const modal = useModal();
   const addNewChild = () => {
@@ -21,17 +24,23 @@ const CalendarBody = props => {
   });
 
   return (
-    <Row className="d-flex justify-content-center">
-      <Col sm={7}>
-        <div className="calendar-body">
-          {child}
-          <div>
-            <Button className="custom-floating-button" onClick={() => modal.toggle()}>
-              <FaPlus />
-            </Button>
-          </div>
-        </div>
-      </Col>
+    <>
+      <Row className="d-flex">
+        <Col sm={{ span: 10, offset: 1 }}>
+          <CalendarBodyHeader meals={meals} />
+          <Row className="calendar-body no-gutters d-flex justify-content-center">
+            {meals.map(name => (
+              <Col className="calendar-body-column">
+                <MealColumn header={name} />
+              </Col>
+            ))}
+          </Row>
+        </Col>
+
+        <Button className="custom-floating-button" onClick={() => modal.toggle()}>
+          <FaPlus />
+        </Button>
+      </Row>
       <Modal {...modal}>
         <div>
           Jakis formularz
@@ -53,7 +62,7 @@ const CalendarBody = props => {
           </RButton>
         </div>
       </Modal>
-    </Row>
+    </>
   );
 };
 

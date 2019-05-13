@@ -9,7 +9,6 @@
     "formik": "^1.5.4",
     "moment": "^2.24.0",
     "node-sass": "^4.11.0",
-    "rbx": "^2.1.0",
     "react": "^16.8.2",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-bulma-components": "^2.3.0",

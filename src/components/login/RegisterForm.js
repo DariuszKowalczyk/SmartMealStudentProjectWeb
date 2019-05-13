@@ -57,7 +57,7 @@ const RegisterForm = props => {
             {status && status.msg ? <SuccessBox message={status.msg} /> : null}
             {status && status.fetchError ? <ErrorBox message={status.fetchError} /> : null}
             <SubmitButton type="submit" fullwidth disabled={isSubmitting}>
-              {isSubmitting ? <ClipLoader sizeUnit="px" size={20} /> : 'Login'}
+              {isSubmitting ? <ClipLoader sizeUnit="px" size={20} /> : 'Zarejestruj'}
             </SubmitButton>
           </FormikForm>
         )}
