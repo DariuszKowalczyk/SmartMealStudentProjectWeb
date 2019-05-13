@@ -5,7 +5,7 @@ import './navbar.css';
 
 export default function NavbarLayout() {
   return (
-    <Navbar expand="lg" style={{ backgroundColor: '#00d1b2', color: '#fff' }} bg="">
+    <Navbar expand="lg" bg="primary">
       <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

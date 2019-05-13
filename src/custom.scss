@@ -1,0 +1,10 @@
+$font-family-sans-serif: Lato, sans-serif;
+
+$primary: #00d1b2;
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link
+{
+    color: whitesmoke !important
+}
+
+@import '~bootstrap/scss/bootstrap.scss';
