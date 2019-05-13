@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Button } from 'react-bulma-components/full';
 import CalendarHeader from './CalendarHeader.js';
+import CalendarBody from './CalendarBody.js';
 import 'moment/locale/pl';
 
 const CalendarContaier = () => {
@@ -40,7 +41,12 @@ const CalendarContaier = () => {
   const changeCurrentActive = day => {
     setActive(days[day]);
   };
-  return <CalendarHeader days={days} active={active} setActive={changeCurrentActive} setNextWeek={nextWeek} setPreviousWeek={previousWeek} />;
+  return (
+    <>
+      <CalendarHeader days={days} active={active} setActive={changeCurrentActive} setNextWeek={nextWeek} setPreviousWeek={previousWeek} />
+      <CalendarBody />
+    </>
+  );
 };
 
 export default CalendarContaier;
