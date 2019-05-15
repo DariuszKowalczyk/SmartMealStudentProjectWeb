@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from 'rbx';
+import { Button } from 'react-bootstrap';
 
 const HeaderButton = ({ value, onClick, isActive }) => (
-  <Button fullwidth size="medium" onClick={onClick} color={isActive ? 'primary' : ''}>
+  <Button style={{ width: '50%' }} onClick={onClick} color={isActive ? 'primary' : ''}>
     {value}
   </Button>
 );

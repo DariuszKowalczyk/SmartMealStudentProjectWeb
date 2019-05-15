@@ -7,6 +7,7 @@ import { store } from './store/Store';
 import { PrivateRoute, NotAuthorizeRoute } from './helpers/RouteHelper';
 import Login from './containers/login/LoginContainer';
 import Home from './containers/home/HomeContainer';
+import Products from './containers/products/ProductContainer';
 import Navbar from './components/navbar/Navbar';
 
 const cookies = new Cookies();
@@ -20,7 +21,8 @@ class App extends Component {
           <Navbar />
           <Switch>
             <NotAuthorizeRoute component={Login} path="/login" />
-            <PrivateRoute component={Home} path="" />
+            <PrivateRoute component={Home} exact path="/" />
+            <PrivateRoute component={Products} path="/products" />
           </Switch>
         </Router>
       </Provider>

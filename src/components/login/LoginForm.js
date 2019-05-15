@@ -43,8 +43,12 @@ const LoginForm = props => {
       setStatus({ msg: 'Wrong e-mail or password' });
     }
   };
-  const responseFacebook = response => {
-    axios.post('http://localhost:56829/api/FacebookAuth', { accessToken: response.accessToken });
+  const responseFacebook = async response => {
+    const result = await axios.post('http://localhost:56829/api/FacebookAuth', { accessToken: response.accessToken });
+    console.log(result, 'RESULT');
+    cookies.set('jwt', result.data.token);
+    AuthHeader(result.data.token);
+    props.history.push('/');
   };
 
   return (

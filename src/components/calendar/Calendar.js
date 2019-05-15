@@ -28,7 +28,7 @@ const CalendarContaier = () => {
       days.push(day.toDate());
       day = day.clone().add(1, 'd');
     }
-    setActive(days[0]);
+    setActive(moment().week() === weekNumber ? moment() : days[0]);
     return days;
   };
 

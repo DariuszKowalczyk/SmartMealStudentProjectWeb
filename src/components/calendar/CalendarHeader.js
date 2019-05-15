@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { Col, Row } from 'react-bootstrap';
-import './Calendar.css';
 
 const CalendarHeader = ({ days, active, setActive, setNextWeek, setPreviousWeek }) => (
   <>

@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ProductForm from "../../components/products";
+import { Container } from 'react-bootstrap';
+import ProductList from '../../components/products/ProductList';
 
 const ProductContainer = props => (
-    <div>
-      
-    </div>
-  );
+  <Container>
+    <ProductList />
+  </Container>
+);
 
 ProductContainer.propTypes = {};
 

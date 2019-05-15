@@ -1,10 +1,19 @@
 $font-family-sans-serif: Lato, sans-serif;
-
-$primary: #00d1b2;
+$primary: #4C2F1F;
+$secondary: #de6e4b;
+$font-small: 0.85rem;
+$font-huge: 1.85rem;
 .navbar-light .navbar-brand,
 .navbar-light .navbar-nav .nav-link
 {
     color: whitesmoke !important
 }
-
+.dropdown, .dropdown-toggle, .dropdown-menu{
+    width: 100% !important
+}
+.font-huge{
+    font-size: $font-huge
+}
+@import './components/products/products.scss';
+@import './components/calendar/calendar.scss';
 @import '~bootstrap/scss/bootstrap.scss';
