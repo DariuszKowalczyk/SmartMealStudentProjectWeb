@@ -81,7 +81,7 @@ const CalendarBody = props => {
             </Col>
           </Row>
         </Col>
-        <FloatingButton action={openModal} />
+        <FloatingButton action={openModal} name="Add new meal!" />
       </Row>
       <Modal>
         <AddMealForm meals={meals} addNewChild={addNewChild} closeModal={closeModal} />

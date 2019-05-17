@@ -1,6 +1,5 @@
 .product-card{
-
-  min-height: 13rem;
+  height: 13rem;
   padding: 0.75rem;
   box-shadow: 0 0 8px 5px #f2f2f2;
   text-align: center;
@@ -30,6 +29,9 @@
   
 }
 .product-card-title{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   padding: 0 !important;
   line-height: 1.5rem;
   font-weight: 600;
@@ -40,4 +42,23 @@
     width: 16rem;
     height: 16rem;
     object-fit: cover;
+}
+.product-modal-icon-{
+  width: 40px;
+  height: 40px;
+  background-color: gray;
+  border: 1px solid black;
+}
+.product-modal-icon-delete-image{
+  cursor: pointer;
+  position: relative;
+  bottom: 125px;
+  right: 25px;
+  &:hover{
+    transform: scale(1.35)  ;
+    -webkit-transform: scale(1.35)  ;
+    -moz-transform: scale(1.35)  ;
+    -ms-transform: scale(1.35)  ;
+    -o-transform: scale(1.35)  ;
+}
 }

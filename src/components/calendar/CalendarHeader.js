@@ -14,11 +14,9 @@ const CalendarHeader = ({ days, active, setActive, setNextWeek, setPreviousWeek 
         <Row className="no-gutters flex-row">
           {days &&
             days.map((day, idx) => (
-              <Col className="calendar-header-col" onClick={() => setActive(idx)} key={idx}>
-                <span>
-                  {moment(day).format('ddd')}. <br />
-                  {moment(day).format('DD/MM/YYYY')}
-                </span>
+              <Col className="calendar-header-col d-flex flex-column" onClick={() => setActive(idx)} key={idx}>
+                <span>{moment(day).format('ddd')}.</span>
+                <span>{moment(day).format('DD/MM/YYYY')}</span>
               </Col>
             ))}
         </Row>
@@ -29,7 +27,7 @@ const CalendarHeader = ({ days, active, setActive, setNextWeek, setPreviousWeek 
     </Row>
     <Row>
       <Col className="d-flex justify-content-center my-4">
-        <div className="calendar-header-active-date">{moment(active).format('dddd DD/MM/YYYY')}</div>
+        <div className="calendar-header-active-date">{moment(active).format('dddd')}</div>
       </Col>
     </Row>
   </>

@@ -14,18 +14,25 @@
 .calendar-header-col:last-child{
     border: none;
 }
-.calendar-header-col span::first-letter{
-    text-transform: uppercase
+.calendar-header-col span{
+    &:first-child{
+        text-transform: capitalize;
+        font-weight: 600;
+    };
+    &:nth-child(2){
+        font-size: $font-small;
+    }
 }
 .calendar-header-active-date{
     background-color: $primary;
     color: white;
+    text-transform: uppercase;
     padding: 1rem;
     width: 16rem;
     text-align: center;
-    &::first-letter{
-        text-transform: uppercase
-    }
+    font-weight: 500;
+    letter-spacing: 1.5px
+   
 }
 
 .calendar-header-arrow-icon:hover{
@@ -44,6 +51,7 @@
 
 }
 .calendar-body-header{
+    font-weight: 600;
     background-color: #EDC79B;
     border-radius: 5%;
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.09);
@@ -65,7 +73,7 @@
     border: none
 }
 
-.fab-item.custom-floating-button{
+.fab-container.custom-floating-button{
     z-index: 100;
     position: fixed;
     bottom: 0;
@@ -74,17 +82,30 @@
 }
 
 .calendar-element{
+    color: white;
     background-color: rgb(222, 110, 75);
+    border-radius:5%;
     height: 6.5rem;
-    border: 1px solid rgba(0, 0, 0, 0.15)
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    -webkit-border-radius:5%;
+    -moz-border-radius:5%;
+    -ms-border-radius:5%;
+    -o-border-radius:5%;
+    &:not(:first-child){
+        margin: 0.2rem
+    }
 }
 .calendar-element-image{
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     object-fit: cover;
 }
-
+.calendar-element-name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 .calendar-modal{
     height: 250px;

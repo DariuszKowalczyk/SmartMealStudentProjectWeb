@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import { Row, Col, Dropdown, Button, Spinner } from 'react-bootstrap';
 import { FaImage } from 'react-icons/fa';
+import { IoMdClose } from 'react-icons/io';
+import { staticImages } from '../../api/consts';
 import { CustomFormInputWithError } from '../common/CustomFormInputWithError';
 import ProductDefault from '../../assets/product_default.png';
 import { ErrorBox } from '../common/Notifications';
@@ -14,26 +16,40 @@ const AddMealSchema = Yup.object().shape({
     .required('Required')
     .min(4, 'should be 4 chars minimum.'),
 });
-const CreateProductForm = ({ categories, closeModal, addNewProduct }) => {
+const CreateProductForm = ({
+  modalTitle,
+  categories,
+  closeModal,
+  buttonTitle,
+  buttonAction,
+  initalName,
+  initialDescription,
+  initialCategory,
+  initialImage,
+}) => {
   const inputFile = useRef(null);
 
-  const [image, setImage] = useState({ preview: ProductDefault, image: null });
+  const [image, setImage] = useState({
+    preview: initialImage ? `${staticImages}/${initialImage}` : ProductDefault,
+    image: initialImage || null,
+  });
   useEffect(() => {}, [image]);
 
+  const handleImageDelete = () => {
+    setImage({ preview: ProductDefault, image: null });
+  };
   const handleImageChange = e => {
     e.preventDefault();
-    setImage(URL.createObjectURL(e.target.files[0]));
-    setImage({ preview: URL.createObjectURL(e.target.files[0]), image: e.target.files[0].name });
+    setImage({ preview: URL.createObjectURL(e.target.files[0]), image: e.target.files[0] });
   };
 
   return (
     <Formik
-      initialValues={{ productName: '', productDescription: '', productCategory: '' }}
+      initialValues={{ productName: '' || initalName, productDescription: '' || initialDescription, productCategory: '' || initialCategory }}
       validationSchema={AddMealSchema}
       onSubmit={async (values, { setSubmitting, setStatus }) => {
         setStatus({});
-        console.log(values, 'VALUES');
-        addNewProduct(values.productName, values.productDescription, image.image, values.productCategory);
+        buttonAction(values.productName, values.productDescription, image.image, values.productCategory);
         closeModal();
         setSubmitting(false);
       }}
@@ -41,12 +57,13 @@ const CreateProductForm = ({ categories, closeModal, addNewProduct }) => {
       {({ values, handleSubmit, isSubmitting, setFieldValue }) => (
         <FormikForm onSubmit={handleSubmit}>
           <Row>
-            <Col className="text-center p-2 mb-3 font-huge text-uppercase">Dodaj produkt</Col>
+            <Col className="text-center p-2 mb-3 font-huge text-uppercase">{modalTitle}</Col>
           </Row>
           <Row>
             <Col className="d-flex justify-content-center p-2 ">
               <div className="calendar-modal">
                 <img src={image.preview} className="calendar-modal-image" alt="profile_picture" />
+                <IoMdClose color="red" className="product-modal-icon-delete-image" onClick={handleImageDelete} />
                 <div>
                   <span onClick={() => inputFile.current.click()} className="calendar-modal-text">
                     Aktualizuj
@@ -101,7 +118,7 @@ const CreateProductForm = ({ categories, closeModal, addNewProduct }) => {
           <Row>
             <Col className="text-center p-2 mb-3">
               <Button type="submit" className="calendar-modal-submit-button text-huge text-uppercase" variant="secondary" disabled={isSubmitting}>
-                {isSubmitting ? <Spinner animation="border" variant="primary" /> : 'Dodaj'}
+                {isSubmitting ? <Spinner animation="border" variant="primary" /> : buttonTitle}
               </Button>
             </Col>
           </Row>

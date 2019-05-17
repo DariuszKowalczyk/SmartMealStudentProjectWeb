@@ -13,7 +13,6 @@ const useModal = () => {
   }, []);
 
   useEffect(() => {
-    console.log(props, 'PROPS');
     setOpen(props !== null);
   }, [props]);
 
