@@ -5,6 +5,7 @@ import ProductList from '../../components/products/ProductList';
 
 const ProductContainer = props => (
   <Container>
+    <div className="text-center font-huge my-2">Produkty</div>
     <ProductList />
   </Container>
 );

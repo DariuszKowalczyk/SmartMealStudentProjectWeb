@@ -1,14 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import { Row, Col, Dropdown, Button, Spinner } from 'react-bootstrap';
 import { FaImage } from 'react-icons/fa';
 import { IoMdClose } from 'react-icons/io';
-import { staticImages } from '../../api/consts';
+import { rawUrl } from '../../helpers/consts';
 import { CustomFormInputWithError } from '../common/CustomFormInputWithError';
 import ProductDefault from '../../assets/product_default.png';
 import { ErrorBox } from '../common/Notifications';
+import CustomDropdown from '../common/Dropdown';
+import { findElementNameById } from '../../helpers/CustomSelectors';
 
 const AddMealSchema = Yup.object().shape({
   productName: Yup.string().required('Required'),
@@ -22,19 +23,18 @@ const CreateProductForm = ({
   closeModal,
   buttonTitle,
   buttonAction,
-  initalName,
-  initialDescription,
-  initialCategory,
-  initialImage,
+  activeProductName,
+  activeProductDescription,
+  activeProductCategory,
+  activeProductImagePath,
 }) => {
   const inputFile = useRef(null);
 
-  const [image, setImage] = useState({
-    preview: initialImage ? `${staticImages}/${initialImage}` : ProductDefault,
-    image: initialImage || null,
-  });
   useEffect(() => {}, [image]);
-
+  const [image, setImage] = useState({
+    preview: activeProductImagePath ? `${rawUrl}${activeProductImagePath}` : ProductDefault,
+    image: activeProductImagePath || null,
+  });
   const handleImageDelete = () => {
     setImage({ preview: ProductDefault, image: null });
   };
@@ -45,7 +45,11 @@ const CreateProductForm = ({
 
   return (
     <Formik
-      initialValues={{ productName: '' || initalName, productDescription: '' || initialDescription, productCategory: '' || initialCategory }}
+      initialValues={{
+        productName: '' || activeProductName,
+        productDescription: '' || activeProductDescription,
+        productCategory: '' || activeProductCategory,
+      }}
       validationSchema={AddMealSchema}
       onSubmit={async (values, { setSubmitting, setStatus }) => {
         setStatus({});
@@ -83,26 +87,13 @@ const CreateProductForm = ({
           </Row>
           <Row>
             <Col className="d-flex justify-content-center p-2 flex-column">
-              <Dropdown className="my-1">
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {values.productCategory || 'Wybierz Kategorię'}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {categories.map((category, idx) => (
-                    <Dropdown.Item
-                      eventKey={category.name}
-                      name="productCategory"
-                      key={idx}
-                      onSelect={e => {
-                        setFieldValue('productCategory', e);
-                      }}
-                    >
-                      {category.name}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
-              <ErrorMessage name="mealType" render={msg => <ErrorBox message={msg} />} />
+              <CustomDropdown
+                array={categories}
+                value={findElementNameById(categories, values.productCategory)}
+                setFieldValue={setFieldValue}
+                fieldName="productCategory"
+                dropdownText="Kategoria"
+              />
             </Col>
           </Row>
           <Row>

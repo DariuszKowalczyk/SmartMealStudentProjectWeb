@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { basicUrl } from './consts';
+import { basicUrl } from '../helpers/consts';
 
 export const getProducts = async () => {
   try {
@@ -7,6 +7,14 @@ export const getProducts = async () => {
     return response.data;
   } catch (err) {
     console.log(err);
+  }
+};
+export const getProductById = async id => {
+  try {
+    const response = await axios.get(`${basicUrl}/Product/${id}`);
+    return response.data;
+  } catch (e) {
+    console.log(e, 'error');
   }
 };
 export const createProduct = async (name, description, image) => {
@@ -17,7 +25,7 @@ export const createProduct = async (name, description, image) => {
       file.append('file', image, image.name);
       imageResult = await axios.post(`${basicUrl}/Product/photo`, file);
     }
-    const response = await axios.post(`${basicUrl}/Product`, { name, description, imagePath: imageResult ? imageResult.data : '' });
+    const response = await axios.post(`${basicUrl}/Product`, { name, description, imagePath: imageResult ? imageResult.data : null });
     return response.data;
   } catch (err) {
     console.log(err);

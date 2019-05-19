@@ -5,16 +5,16 @@ import { FaPlus, FaShoppingBasket, FaBook, FaCalendarDay } from 'react-icons/fa'
 
 const FloatingButton = ({ action, name }) => (
   <Container className="custom-floating-button">
-    <Link href="/Recepies" tooltip="Recepies">
+    <Link href="/Recipes" tooltip="Przepisy">
       <FaBook />
     </Link>
-    <Link href="/Products" tooltip="Products">
+    <Link href="/Products" tooltip="Produkty">
       <FaShoppingBasket />
     </Link>
-    <Link href="/" tooltip="Food Calendar">
+    <Link href="/" tooltip="Kalendarz żywienia">
       <FaCalendarDay />
     </Link>
-    <Button tooltip={name} onClick={() => action()}>
+    <Button tooltip={name} onClick={action}>
       <FaPlus />
     </Button>
   </Container>

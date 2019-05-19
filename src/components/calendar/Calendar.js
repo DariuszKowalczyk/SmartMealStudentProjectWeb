@@ -43,7 +43,7 @@ const CalendarContaier = () => {
   return (
     <>
       <CalendarHeader days={days} active={active} setActive={changeCurrentActive} setNextWeek={nextWeek} setPreviousWeek={previousWeek} />
-      <CalendarBody />
+      <CalendarBody currentDate={active} />
     </>
   );
 };
