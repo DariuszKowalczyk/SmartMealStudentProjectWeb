@@ -4,7 +4,7 @@ import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import { Row, Col, Dropdown, Button, Spinner } from 'react-bootstrap';
 import { FaImage } from 'react-icons/fa';
 import { IoMdClose } from 'react-icons/io';
-import { rawUrl } from '../../helpers/consts';
+import { rawUrl, staticImages } from '../../helpers/consts';
 import { CustomFormInputWithError } from '../common/CustomFormInputWithError';
 import ProductDefault from '../../assets/product_default.png';
 import { ErrorBox } from '../common/Notifications';
@@ -32,7 +32,7 @@ const CreateProductForm = ({
 
   useEffect(() => {}, [image]);
   const [image, setImage] = useState({
-    preview: activeProductImagePath ? `${rawUrl}${activeProductImagePath}` : ProductDefault,
+    preview: activeProductImagePath ? `${staticImages}${activeProductImagePath}` : ProductDefault,
     image: activeProductImagePath || null,
   });
   const handleImageDelete = () => {

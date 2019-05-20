@@ -3,7 +3,7 @@ import { Dropdown } from 'react-bootstrap';
 import { ErrorMessage } from 'formik';
 import { ErrorBox } from './Notifications';
 
-const CustomDropdown = ({ array, value, setFieldValue, fieldName, dropdownText }) => (
+const CustomDropdown = ({ array, value, setFieldValue, fieldName, dropdownText, setRecipe }) => (
   <>
     <Dropdown className="my-1">
       <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -18,6 +18,9 @@ const CustomDropdown = ({ array, value, setFieldValue, fieldName, dropdownText }
               key={idx}
               onSelect={e => {
                 setFieldValue(fieldName, parseInt(e));
+                if(setRecipe){
+                  setRecipe(element);
+                }
               }}
             >
               {element.name}

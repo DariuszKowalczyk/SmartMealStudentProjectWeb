@@ -4,7 +4,7 @@ import { Col, Row, Spinner } from 'react-bootstrap';
 import FloatingButton from '../common/FloatingButton';
 import { useRecipeFetchHook } from '../../hooks/useRecipeFetchHook';
 import { getRecipes } from '../../api/recipes';
-import { rawUrl } from '../../helpers/consts';
+import { rawUrl, staticImages } from '../../helpers/consts';
 import recipeDefault from '../../assets/recipe_default.png';
 
 const RecipeList = props => {
@@ -47,7 +47,7 @@ const RecipeList = props => {
           recipes.map(recipe => (
             <Col xs={12} sm={6} md={4} className="d-flex justify-content-center flex-column align-items-center mb-4" key={recipe.id}>
               <img
-                src={recipe.imagePath ? `${rawUrl}${recipe.imagePath}` : recipeDefault}
+                src={recipe.imagePath ? `${staticImages}${recipe.imagePath}` : recipeDefault}
                 alt="recipe_image"
                 className="recipie-list-image"
                 onClick={() => {

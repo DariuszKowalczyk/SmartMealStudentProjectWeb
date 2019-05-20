@@ -7,9 +7,9 @@ export const createRecipe = async (name, description, image, ingredients, resetF
     if (image) {
       const file = new FormData();
       file.append('file', image, image.name);
-      imageResult = await axios.post(`${basicUrl}/Recipe/photo`, file);
+      imageResult = await axios.post(`${basicUrl}/Photo`, file);
     }
-    const response = await axios.post(`${basicUrl}/Recipe`, { name, description, imagePath: imageResult ? imageResult.data : null, ingredients });
+    const response = await axios.post(`${basicUrl}/Recipe`, { name, description, imagePath: imageResult ? imageResult.data.imagePath : null, ingredients });
     resetForm();
     return response.data;
   } catch (err) {

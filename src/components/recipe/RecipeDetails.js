@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Col, Row, Spinner } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { rawUrl } from '../../helpers/consts';
+import { rawUrl, staticImages } from '../../helpers/consts';
 import { getRecipesById } from '../../api/recipes';
 import recipeDefault from '../../assets/recipe_default.png';
 
@@ -40,7 +40,7 @@ const RecipeDetails = props => {
     return (
       <Row>
         <Col xs={4} className="d-flex justify-content-center">
-          <img src={recipe.imagePath ? `${rawUrl}${recipe.imagePath}` : recipeDefault} alt="recipe_image" />
+          <img src={recipe.imagePath ? `${staticImages}${recipe.imagePath}` : recipeDefault} alt="recipe_image" />
         </Col>
         <Col xs={8} className="d-flex flex-column">
           <Row className="no-gutters">

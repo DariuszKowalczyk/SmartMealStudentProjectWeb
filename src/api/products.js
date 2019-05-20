@@ -23,9 +23,9 @@ export const createProduct = async (name, description, image) => {
     if (image) {
       const file = new FormData();
       file.append('file', image, image.name);
-      imageResult = await axios.post(`${basicUrl}/Product/photo`, file);
+      imageResult = await axios.post(`${basicUrl}/Photo`, file);
     }
-    const response = await axios.post(`${basicUrl}/Product`, { name, description, imagePath: imageResult ? imageResult.data : null });
+    const response = await axios.post(`${basicUrl}/Product`, { name, description, imagePath: imageResult ? imageResult.data.imagePath : null });
     return response.data;
   } catch (err) {
     console.log(err);
@@ -45,8 +45,9 @@ export const editProductById = async (name, description, image, category, id) =>
     if (image instanceof File) {
       const file = new FormData();
       file.append('file', image, image.name);
-      imageResult = await axios.post(`${basicUrl}/Product/photo`, file);
+      imageResult = await axios.post(`${basicUrl}/Photo`, file);
     }
+    
     await axios.patch(`${basicUrl}/Product/${id}`, { name, description, imagePath: imageResult ? imageResult.data : image });
   } catch (e) {
     console.log(e, 'err');

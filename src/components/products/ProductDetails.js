@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-import { rawUrl } from '../../helpers/consts';
+import { rawUrl,staticImages } from '../../helpers/consts';
 import productDefault from '../../assets/product_default.png';
 
 const ProductDetails = ({ activeProduct, closeModal, openModal, deleteById }) => (
@@ -11,7 +11,7 @@ const ProductDetails = ({ activeProduct, closeModal, openModal, deleteById }) =>
     </Row>
     <Row>
       <Col className="d-flex justify-content-center p-2">
-        <img src={activeProduct.imagePath ? `${rawUrl}${activeProduct.imagePath}` : productDefault} alt="product" className="product-modal-image" />
+        <img src={activeProduct.imagePath ? `${staticImages}${activeProduct.imagePath}` : productDefault} alt="product" className="product-modal-image" />
       </Col>
     </Row>
     <Row>

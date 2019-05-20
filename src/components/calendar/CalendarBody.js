@@ -38,17 +38,6 @@ const CalendarBody = props => {
     setRecipes(response);
     setIsLoading(false);
   };
-
-  // const addNewChild = (name, type, image) => {
-  //   children.map(child => {
-  //     if (child.type === type) {
-  //       return setNewChild(() => [{ type: child.type, elements: [...child.elements, { name, image }] }]);
-  //     }
-  //     if (child.type > 0 && child.type < 5) {
-  //       return setNewChild(() => [{ type, elements: [{ name, image }] }]);
-  //     }
-  //   });
-  // };
   const addNewElement = async (day, mealTime, recipeId) => {
     const reponse = await createNewElement(day, mealTime, recipeId);
     setIsUpdated(true);
@@ -57,25 +46,6 @@ const CalendarBody = props => {
     const response = await getCalendarDay(day);
     const responseWithNames = response && response.map(f => ({ ...f, name: findElementNameById(recipes, f.recipeId) }));
     setNewChild(responseWithNames);
-    // const resul = response.filter(obj => obj.mealTime === 1);
-    // response.map(child => {
-    //   if (child.mealTime === 0) {
-    //     setBreakfast([...breakfast, { name: findElementNameById(recipes, child.recipeId), ...child }]);
-    //   }
-    //   if (child.mealTime === 1) {
-    //     setSecondBreakfast(() => [...secondBreakfast, { name: findElementNameById(recipes, child.recipeId), ...child }]);
-    //   }
-    //   if (child.mealTime === 2) {
-    //     setDinner([...dinner, { name: findElementNameById(recipes, child.recipeId), ...child }]);
-    //   }
-    //   if (child.mealTime === 3) {
-    //     setAfterNoonSnack([...afterNoonSnack, { name: findElementNameById(recipes, child.recipeId), ...child }]);
-    //   }
-    //   if (child.mealTime === 4) {
-    //     setSapper([...sapper, { name: findElementNameById(recipes, child.recipeId), ...child }]);
-    //   }
-    // });
-    // console.log(dinner, 'SECOND');
   };
   useEffect(() => {
     // API FETCH FOR MEALS FOR ACTIVE DAY

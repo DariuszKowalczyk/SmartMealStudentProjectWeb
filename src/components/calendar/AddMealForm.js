@@ -7,16 +7,18 @@ import { FaImage } from 'react-icons/fa';
 import { CustomFormInputWithError } from '../common/CustomFormInputWithError';
 import DefaultImage from '../../assets/default.jpg';
 import { getRecipes } from '../../api/recipes';
-import { findElementNameById } from '../../helpers/CustomSelectors';
+import { findElementNameById, findElementById } from '../../helpers/CustomSelectors';
 import CustomDropdown from '../common/Dropdown';
+import { basicUrl, staticImages } from '../../helpers/consts'
 
 const AddMealSchema = Yup.object().shape({
   mealType: Yup.string().required('Required'),
   mealName: Yup.string().required('Required.'),
 });
+
 const AddMealForm = ({ meals, addNewChild, closeModal, currentDate }) => {
   const inputFile = useRef(null);
-
+  const [selectecdRecipe, setSelectedRecipe] = useState(null);
   const [image, setImage] = useState({ preview: DefaultImage, image: null });
   const [recipes, setRecipes] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,15 +30,21 @@ const AddMealForm = ({ meals, addNewChild, closeModal, currentDate }) => {
   };
 
   useEffect(() => {
+    
     fetchRecipies();
   }, []);
 
+  const handleRecipeSelect = (recipe) =>{
+    setSelectedRecipe(recipe);
+    if(recipe.imagePath){
+      setImage({preview: `${staticImages}${recipe.imagePath}`})
+    }
+  }
   const handleImageChange = e => {
     e.preventDefault();
     setImage(URL.createObjectURL(e.target.files[0]));
     setImage({ preview: URL.createObjectURL(e.target.files[0]), image: e.target.files[0].name });
   };
-  console.log(isLoading, error, recipes);
   if (isLoading) {
     return (
       <Row>
@@ -74,12 +82,6 @@ const AddMealForm = ({ meals, addNewChild, closeModal, currentDate }) => {
               <Col className="d-flex justify-content-center p-2 ">
                 <div className="calendar-modal">
                   <img src={image.preview} className="calendar-modal-image" alt="profile_picture" />
-                  <div>
-                    <span onClick={() => inputFile.current.click()} className="calendar-modal-text">
-                      Aktualizuj
-                      <FaImage className="calendar-image-icon" size={20} />
-                    </span>
-                  </div>
                 </div>
                 <input
                   className="d-none"
@@ -110,6 +112,7 @@ const AddMealForm = ({ meals, addNewChild, closeModal, currentDate }) => {
                   setFieldValue={setFieldValue}
                   fieldName="mealName"
                   dropdownText="Potrawa"
+                  setRecipe={handleRecipeSelect}
                 />
               </Col>
             </Row>
