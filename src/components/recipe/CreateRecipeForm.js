@@ -102,8 +102,8 @@ const CreateRecipeForm = () => {
             render={arrayHelpers => (
               <>
                 {values.recipeIngredients.map((ingredients, index) => (
-                  <>
-                    <Row className="justify-content-center" key={index}>
+                  <div key={index}>
+                    <Row className="justify-content-center">
                       <Col xs={12} sm={4} md={4}>
                         <CustomDropdown
                           array={products}
@@ -131,7 +131,7 @@ const CreateRecipeForm = () => {
                         <FaTrash color="red" onClick={() => arrayHelpers.remove(index)} />
                       </Col>
                     </Row>
-                  </>
+                  </div>
                 ))}
                 <Row className="justify-content-center">
                   <Col sm={12} md={8} className="d-flex justify-content-end my-3">

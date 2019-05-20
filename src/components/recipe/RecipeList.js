@@ -12,12 +12,13 @@ const RecipeList = props => {
   const [error, setError] = useState('');
   const fetchRecipes = async () => {
     const result = await getRecipes(setError);
-    console.log(result, 'RED');
     setRecipes(result);
   };
+
   useEffect(() => {
     fetchRecipes();
   }, []);
+
   if (recipes === null) {
     return (
       <Row>

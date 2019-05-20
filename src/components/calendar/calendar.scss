@@ -152,8 +152,12 @@
     right: 22px;
 }
 .calendar-modal-submit-button{
-    background-color: #de6e4b !important;
     border: none;
     width: 100%;
     height: 50px
+}
+.calendar-details-image,
+.recipe-details-image{
+    width: 15rem;
+    height: 15rem;
 }

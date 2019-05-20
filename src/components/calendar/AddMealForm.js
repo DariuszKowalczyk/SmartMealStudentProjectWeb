@@ -9,7 +9,7 @@ import DefaultImage from '../../assets/default.jpg';
 import { getRecipes } from '../../api/recipes';
 import { findElementNameById, findElementById } from '../../helpers/CustomSelectors';
 import CustomDropdown from '../common/Dropdown';
-import { basicUrl, staticImages } from '../../helpers/consts'
+import { basicUrl, staticImages } from '../../helpers/consts';
 
 const AddMealSchema = Yup.object().shape({
   mealType: Yup.string().required('Required'),
@@ -30,16 +30,18 @@ const AddMealForm = ({ meals, addNewChild, closeModal, currentDate }) => {
   };
 
   useEffect(() => {
-    
     fetchRecipies();
   }, []);
 
-  const handleRecipeSelect = (recipe) =>{
+  const handleRecipeSelect = recipe => {
     setSelectedRecipe(recipe);
-    if(recipe.imagePath){
-      setImage({preview: `${staticImages}${recipe.imagePath}`})
+    console.log(recipe);
+    if (recipe.imagePath) {
+      setImage({ preview: `${staticImages}${recipe.imagePath}` });
+    } else if (recipe.imagePath === null) {
+      setImage({ preview: DefaultImage });
     }
-  }
+  };
   const handleImageChange = e => {
     e.preventDefault();
     setImage(URL.createObjectURL(e.target.files[0]));

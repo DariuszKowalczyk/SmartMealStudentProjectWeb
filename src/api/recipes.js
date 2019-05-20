@@ -9,7 +9,12 @@ export const createRecipe = async (name, description, image, ingredients, resetF
       file.append('file', image, image.name);
       imageResult = await axios.post(`${basicUrl}/Photo`, file);
     }
-    const response = await axios.post(`${basicUrl}/Recipe`, { name, description, imagePath: imageResult ? imageResult.data.imagePath : null, ingredients });
+    const response = await axios.post(`${basicUrl}/Recipe`, {
+      name,
+      description,
+      imagePath: imageResult ? imageResult.data.imagePath : null,
+      ingredients,
+    });
     resetForm();
     return response.data;
   } catch (err) {
@@ -34,11 +39,12 @@ export const getRecipesById = async (id, setError) => {
     setError(err);
   }
 };
-export const deleteRecipeById = async (id, setError) => {
+export const deleteRecipe = async (id, setError) => {
   try {
     const response = await axios.delete(`${basicUrl}/Recipe/${id}`);
-    return response.data;
+    return response;
   } catch (err) {
-    setError(err);
+    console.log(err, 'ERR');
+    setError('Wystąpił problem z serwerem, spróbuj ponownie później.');
   }
 };

@@ -45,7 +45,6 @@ const ProductList = props => {
   };
   const addNewProduct = async (name, description, image, category) => {
     await createProduct(name, description, image);
-    console.log(...products, 'WAHAT');
     setProducts(() => [...products, { name, description, image, category }]);
     setIsUpdated(true);
   };

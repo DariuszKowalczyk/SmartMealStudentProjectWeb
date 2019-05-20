@@ -39,16 +39,19 @@ const LoginForm = props => {
       props.history.push('/');
       return result;
     } catch (fetchError) {
-      console.log('123');
       setStatus({ msg: 'Wrong e-mail or password' });
     }
   };
-  const responseFacebook = async response => {
-    const result = await axios.post('http://localhost:56829/api/FacebookAuth', { accessToken: response.accessToken });
-    console.log(result, 'RESULT');
-    cookies.set('jwt', result.data.token);
-    AuthHeader(result.data.token);
-    props.history.push('/');
+  const responseFacebook = async (response, setStatus) => {
+    console.log(response, 'RESPONSE');
+    try {
+      const result = await axios.post('http://localhost:56829/api/FacebookAuth', { accessToken: response.accessToken });
+      cookies.set('jwt', result.data.token);
+      AuthHeader(result.data.token);
+      props.history.push('/');
+    } catch (err) {
+      setStatus({ msg: 'Something went wrong.' });
+    }
   };
 
   return (
@@ -62,7 +65,7 @@ const LoginForm = props => {
         setSubmitting(false);
       }}
     >
-      {({ handleSubmit, isSubmitting, status }) => (
+      {({ handleSubmit, isSubmitting, status, setSubmitting, setStatus }) => (
         <FormikForm onSubmit={handleSubmit}>
           <Field name="email" type="email" component={CustomFormInputWithError} placeholder="E-mail" />
           <Field name="password" type="password" component={CustomFormInputWithError} placeholder="Password" />
@@ -71,7 +74,13 @@ const LoginForm = props => {
             {isSubmitting ? <ClipLoader sizeUnit="px" size={20} /> : 'Login'}
           </SubmitButton>
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-            <FacebookLogin appId="2019472508359422" fields="name,email,picture" onClick={() => {}} callback={responseFacebook} />
+            <FacebookLogin
+              appId="2019472508359422"
+              fields="name,email,picture"
+              onClick={() => setSubmitting(true)}
+              callback={e => responseFacebook(e, setStatus)}
+              isDisabled={isSubmitting}
+            />
           </div>
         </FormikForm>
       )}
