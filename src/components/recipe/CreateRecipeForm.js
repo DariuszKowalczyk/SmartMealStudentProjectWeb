@@ -4,9 +4,9 @@ import { FaImage, FaPlus, FaTrash } from 'react-icons/fa';
 import { IoMdClose } from 'react-icons/io';
 import { Formik, Form as FormikForm, Field, FieldArray } from 'formik';
 import { Row, Col, Button, Spinner } from 'react-bootstrap';
-import FloatingButton from '../common/FloatingButton';
 import { getProducts } from '../../api/products';
 import { createRecipe } from '../../api/recipes';
+import { ErrorBox, SuccessBox } from '../common/Notifications';
 import { metrics } from '../../helpers/consts';
 import { CustomFormInputWithError } from '../common/CustomFormInputWithError';
 import recipeDefault from '../../assets/recipe_default.png';
@@ -58,12 +58,12 @@ const CreateRecipeForm = () => {
         recipeIngredients: [{ amount: '', metric: '', productId: '' }],
       }}
       validationSchema={CreateRecipeSchema}
-      onSubmit={async (values, { setSubmitting, resetForm }) => {
-        await createRecipe(values.recipeName, values.recipeDescription, image.image, values.recipeIngredients, resetForm);
+      onSubmit={async (values, { setSubmitting, resetForm, setStatus }) => {
+        await createRecipe(values.recipeName, values.recipeDescription, image.image, values.recipeIngredients, resetForm, setStatus);
         setSubmitting(false);
       }}
     >
-      {({ values, handleSubmit, setFieldValue, isSubmitting }) => (
+      {({ values, handleSubmit, setFieldValue, isSubmitting, status }) => (
         <FormikForm onSubmit={handleSubmit}>
           <Row>
             <Col className="d-flex justify-content-center p-2 ">
@@ -143,9 +143,15 @@ const CreateRecipeForm = () => {
           />
           <Row className="justify-content-center">
             <Col sm={12} md={8} className="text-center p-2 mb-3">
-              <Button type="submit" className="calendar-modal-submit-button text-huge text-uppercase" variant="secondary" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                className="calendar-modal-submit-button text-huge text-uppercase mb-1"
+                variant="secondary"
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? <Spinner animation="border" variant="primary" /> : 'Dodaj'}
               </Button>
+              {status && status.msg ? <ErrorBox message={status.msg} /> : null}
             </Col>
           </Row>
         </FormikForm>

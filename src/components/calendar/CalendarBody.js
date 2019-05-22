@@ -134,7 +134,7 @@ const CalendarBody = props => {
       <MealDetails>
         {isModalLoading ? (
           <Row>
-            <Col>
+            <Col className="d-flex justify-content-center">
               <Spinner animation="border" variant="primary" />
             </Col>
           </Row>

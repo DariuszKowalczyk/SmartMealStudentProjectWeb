@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Row, Spinner, Button, Modal as RModal } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { FaTrashAlt } from 'react-icons/fa';
-import { MdReplay } from 'react-icons/md';
-import { rawUrl, staticImages } from '../../helpers/consts';
+import { rawUrl, staticImages, metrics } from '../../helpers/consts';
 import { findElementNameById } from '../../helpers/CustomSelectors';
 import { getRecipesById, deleteRecipe } from '../../api/recipes';
 import recipeDefault from '../../assets/recipe_default.png';
@@ -59,7 +56,7 @@ const RecipeDetails = props => {
             <ul className="my-2 recipe-details-list">
               {recipe.ingredients &&
                 recipe.ingredients.map((ingredient, index) => {
-                  const string = `${ingredient.product.name} ${ingredient.amount} ${ingredient.metric}`;
+                  const string = `${ingredient.product.name} ${ingredient.amount} ${findElementNameById(metrics, ingredient.metric)}`;
                   return <li key={index}>{string}</li>;
                 })}
             </ul>

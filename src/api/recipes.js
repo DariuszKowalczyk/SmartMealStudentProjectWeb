@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { basicUrl } from '../helpers/consts';
 
-export const createRecipe = async (name, description, image, ingredients, resetForm) => {
+export const createRecipe = async (name, description, image, ingredients, resetForm, setStatus) => {
   try {
     let imageResult;
     if (image) {
@@ -18,16 +18,17 @@ export const createRecipe = async (name, description, image, ingredients, resetF
     resetForm();
     return response.data;
   } catch (err) {
-    console.log(err);
+    setStatus({ msg: 'Something went wrong.' });
+    console.log(err.message, 'ERROR');
   }
 };
 export const getRecipes = async setError => {
   try {
     const response = await axios.get(`${basicUrl}/Recipe`);
+    console.log(response.data, 'DATA');
     return response.data;
   } catch (err) {
     setError(err);
-    console.log(err);
   }
 };
 export const getRecipesById = async (id, setError) => {

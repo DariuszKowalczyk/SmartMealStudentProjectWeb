@@ -7,9 +7,11 @@ import styled from 'styled-components';
 import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { bindActionCreators } from 'redux';
 import * as Yup from 'yup';
+import { connect } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
-import { ErrorBox, SuccessBox } from '../common/Notifications';
+import { setCurrentUser } from '../../store/modules/user/actions';
 import { CustomFormInputWithError } from '../common/CustomFormInputWithError';
 import AuthHeader from '../../helpers/AuthHeader';
 
@@ -31,23 +33,26 @@ const SignupSchema = Yup.object().shape({
 const cookies = new Cookies();
 
 const LoginForm = props => {
+  const { setCurrentUser } = props;
   const loginRequest = async (email, password, setStatus) => {
     try {
       const result = await axios.post('http://localhost:56829/api/Auth', { email, password });
       cookies.set('jwt', result.data.token);
       AuthHeader(result.data.token);
+      setCurrentUser(result.data.name);
       props.history.push('/');
+
       return result;
     } catch (fetchError) {
       setStatus({ msg: 'Wrong e-mail or password' });
     }
   };
   const responseFacebook = async (response, setStatus) => {
-    console.log(response, 'RESPONSE');
     try {
       const result = await axios.post('http://localhost:56829/api/FacebookAuth', { accessToken: response.accessToken });
       cookies.set('jwt', result.data.token);
       AuthHeader(result.data.token);
+      setCurrentUser(response.name);
       props.history.push('/');
     } catch (err) {
       setStatus({ msg: 'Something went wrong.' });
@@ -69,7 +74,7 @@ const LoginForm = props => {
         <FormikForm onSubmit={handleSubmit}>
           <Field name="email" type="email" component={CustomFormInputWithError} placeholder="E-mail" />
           <Field name="password" type="password" component={CustomFormInputWithError} placeholder="Password" />
-          {status && status.msg ? <ErrorBox message={status.msg} /> : null}
+
           <SubmitButton type="submit" fullwidth disabled={isSubmitting}>
             {isSubmitting ? <ClipLoader sizeUnit="px" size={20} /> : 'Login'}
           </SubmitButton>
@@ -89,5 +94,14 @@ const LoginForm = props => {
 };
 
 LoginForm.propTypes = {};
-
-export default withRouter(LoginForm);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      setCurrentUser,
+    },
+    dispatch
+  );
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(LoginForm));
