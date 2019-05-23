@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { Navbar, Button, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {logoutCurrentUser} from '../../store/modules/user/actions'
 import * as userSelectors from '../../store/modules/user/selectors';
 import './navbar.css';
 /* <Navbar style={{ backgroundColor: '#00d1b2' }}> */
 const cookies = new Cookies();
 
 const NavbarLayout = props => {
-  const { currentUser } = props;
+  const { currentUser, logoutCurrentUser } = props;
   const logout = () => {
     cookies.remove('jwt');
+    logoutCurrentUser()
     props.history.push('/login');
   };
   return (
@@ -49,7 +52,9 @@ const mapStateToProps = state => ({
   currentUser: userSelectors.getCurrentUser(state),
 });
 
+const mapDispatchToProps = dispatch => bindActionCreators({logoutCurrentUser}, dispatch);
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps,
 )(withRouter(NavbarLayout));
