@@ -48,20 +48,23 @@ const CalendarBody = props => {
   const fetchRecipies = async () => {
     setIsLoading(true);
     const response = await getRecipes(setError);
-    setRecipes(response);
+    if(response){
+      setRecipes(response);
+    }
     setIsLoading(false);
   };
 
   const addNewElement = async (day, mealTime, recipeId) => {
-    console.log(day, 'DAY');
     const reponse = await createNewElement(day, mealTime, recipeId);
     setIsUpdated(true);
   };
 
   const fetchDayElements = async day => {
     const response = await getCalendarDay(day);
-    const responseWithNames = response && response.map(f => ({ ...f, name: findElementNameById(recipes, f.recipeId) }));
-    setNewChild(responseWithNames);
+    if(response){
+      const responseWithNames = response && response.map(f => ({ ...f, name: findElementNameById(recipes, f.recipeId) }));
+      setNewChild(responseWithNames);
+    }
   };
 
   const deleteMeal = async id => {
