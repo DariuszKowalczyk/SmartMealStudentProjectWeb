@@ -19,7 +19,21 @@ export const createNewElement = async (mealDay, mealTime, recipeId) => {
     console.log(err);
   }
 };
-
+export const getPdf = async day => {
+  try {
+    const response = await axios.get(`${basicUrl}/Timetable/pdf?day=${day}`, { method: 'GET', responseType: 'blob' });
+    console.log(new Blob([response.data]), response.data, 'DATA');
+    const downloadUrl = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.setAttribute('download', `harmonogram-${moment(day).format('YYYY/MM/DD')}.pdf`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch (err) {
+    console.log(err);
+  }
+};
 export const getCalendarElementById = async (id, setError) => {
   try {
     const response = await axios.get(`${basicUrl}/Timetable/${id}`);
